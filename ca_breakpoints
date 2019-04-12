@@ -1,0 +1,23 @@
+set sysroot <optee-project>/out-br/host/aarch64-buildroot-linux-gnu/sysroot/
+file <optee-project>/optee_examples/number/host/optee_number
+
+set breakpoint pending on
+
+skip TEEC_InitializeContext
+skip TEEC_OpenSession
+skip TEEC_CloseSession
+skip TEEC_FinalizeContext
+skip -rfu ^mem
+skip -rfu ^__
+skip -rfu print
+skip -rfu mutex
+skip -rfu MUTEX
+
+break main
+break ioctl
+break teec_pre_process_operation
+break teec_post_process_operation
+break TEEC_InvokeCommand
+break TEEC_AllocateSharedMemory
+break TEEC_ReleaseSharedMemory
+

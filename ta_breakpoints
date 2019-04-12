@@ -1,0 +1,32 @@
+symbol-file <optee-project>/optee_os/out/arm/core/tee.elf
+add-symbol-file <optee-project>/optee_examples/number/ta/c0c87309-4073-447f-bfb4-e559784adcb8.elf 0x40005000
+
+set breakpoint pending on
+
+skip core_mmu_find_table
+skip qsort
+skip to_user_ta_ctx
+skip free
+skip -rfu .alloc
+skip -rfu ^mem
+skip -rfu ^__
+skip -rfu ^mutex
+skip -rfu ^thread
+skip -rfu ^cpu_spin
+skip -rfu ^get_core
+
+break tee_entry_std
+break tee_mmu_set_ctx
+break user_ta_enter
+break core/include/tee/tee_svc.h:user_ta_enter
+break sum_value
+break set_invoke_timeout
+break tee_ta_push_current_session
+break tee_ta_pop_current_session
+break copy_in_params
+break copy_out_params
+break map_cmd_buffer
+break thread_enter_user_mode
+break TA_InvokeCommandEntryPoint
+break sum_value
+
